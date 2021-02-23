@@ -1,14 +1,18 @@
-package com.farmacia.model;
+package com.br.farmacia.farmacia.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@Entity 
+
+@Entity @Table (name="Categorias")
 public class Categoria {
 	
 	
@@ -27,6 +31,18 @@ public class Categoria {
 	@Size(min = 2,max = 50)
 	private String sintoma;
 	
+	@ManyToOne
+	@JsonIgnoreProperties("farmacia")
+	private Produto produto;
+	
+
+	public Produto getProduto() {
+		return produto;
+	}
+
+	public void setProduto(Produto produto) {
+		this.produto = produto;
+	}
 
 	public long getId() {
 		return id;
